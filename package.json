@@ -1,10 +1,10 @@
 {
-  "name": "usesessionstoragestate",
+  "name": "browser-storage-hooks",
   "version": "1.0.0",
-  "description": "React hook to use state through session storage",
+  "description": "React hooks to abstract over useState with browser specific storage",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Kellan Martin",
   "license": "MIT",
@@ -13,6 +13,16 @@
     "typescript": "^3.9.7"
   },
   "devDependencies": {
-    "eslint": "^7.7.0"
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.10",
+    "@types/react-dom": "^16.9.8",
+    "babel-jest": "^26.3.0",
+    "eslint": "^7.7.0",
+    "jest": "^26.4.0",
+    "react-dom": "^16.13.1",
+    "react-test-renderer": "^16.13.1"
   }
 }
