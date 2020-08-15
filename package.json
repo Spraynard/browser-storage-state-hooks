@@ -1,5 +1,5 @@
 {
-  "name": "browser-storage-hooks",
+  "name": "browser-storage-state-hooks",
   "version": "1.0.0",
   "description": "React hooks to abstract over useState with browser specific storage",
   "main": "index.js",
