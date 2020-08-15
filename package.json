@@ -1,0 +1,15 @@
+{
+  "name": "usesessionstoragestate",
+  "version": "1.0.0",
+  "description": "React hook to use state through session storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kellan Martin",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.13.1",
+    "typescript": "^3.9.7"
+  }
+}
