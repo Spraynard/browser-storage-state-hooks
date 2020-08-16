@@ -8,19 +8,20 @@ import { GeneralStorageType, UnserializerFn, SerializerFn } from "./types";
  * @param key Key that we are to save to session storage to
  * @param transforms Object that transforms our given value, or values within our given value (if it itself is an object )
  */
-const setStorageState = <T>(
+function setStorageState<T>(
     key: string,
     setter: React.Dispatch<React.SetStateAction<T>>,
     serializer: SerializerFn<T>,
     storage: Storage
-) =>
-    (value: any) => {
+) {
+    return (value: T) => {
         /** Sets state in our browser storage */
         storage.setItem(key, serializer(value));
 
         /** Sets state in application */
         return setter(value);
     }
+}
 
 
 /**
@@ -114,7 +115,7 @@ export function useLocalStorageState<T extends GeneralStorageType<string | numbe
  * @param initialState Initial state for storage
  * @param key key for storage
  */
-export function useSessionStorageState<T extends GeneralStorageType<string | number | object>>(
+export function useSessionStorageState<T extends GeneralStorageType<string | number | object | null>>(
     key: string,
     initialState: T,
 ) {
@@ -122,7 +123,6 @@ export function useSessionStorageState<T extends GeneralStorageType<string | num
         key,
         initialState,
         (value) => JSON.parse(value),
-        (value) => JSON.stringify(value),
-
+        (value) => JSON.stringify(value)
     )
 }

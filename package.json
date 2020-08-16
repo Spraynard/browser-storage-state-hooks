@@ -4,7 +4,8 @@
   "description": "React hooks to abstract over useState with browser specific storage",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc index.ts"
   },
   "author": "Kellan Martin",
   "license": "MIT",
