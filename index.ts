@@ -1,5 +1,15 @@
 import React from "react";
-import { GeneralStorageType, UnserializerFn, SerializerFn } from "./types";
+
+/* Allows for anything except for functions */
+export type NotFunction<T> = T extends Function ? never : T;
+export type GeneralStorageTypeObject<T> = { [key: string]: NotFunction<T> };
+export type GeneralStorageType<T> = NotFunction<T> | GeneralStorageTypeObject<T>;
+
+/** Type of function that serializes an object to a string */
+export type SerializerFn<T> = (value: T) => string;
+
+/** Type of function that unserializes a string to a given object */
+export type UnserializerFn<T> = (value: string) => T;
 
 /**
  * Function to encapsulate our saving procedures.
@@ -13,7 +23,7 @@ function setStorageState<T>(
     setter: React.Dispatch<React.SetStateAction<T>>,
     serializer: SerializerFn<T>,
     storage: Storage
-) {
+): React.Dispatch<React.SetStateAction<T>> {
     return (value: T) => {
         /** Sets state in our browser storage */
         storage.setItem(key, serializer(value));
@@ -50,11 +60,11 @@ function useStorageState<T extends any>(
     unserializerFn: UnserializerFn<T>,
     serializerFn: SerializerFn<T>,
     storage: Storage = window.localStorage,
-) {
+): [T, (value: T) => void] {
     let serialized: string | null = null;
     let unserialized: T = initial;
 
-    if (window.localStorage.getItem(key)) {
+    if (storage.getItem(key)) {
         serialized = storage.getItem(key)
     }
 
@@ -64,7 +74,10 @@ function useStorageState<T extends any>(
 
     const [state, setState] = React.useState<T>(unserialized);
 
-    return [state, setStorageState(key, setState, serializerFn, storage)]
+    return [
+        state,
+        setStorageState<T>(key, setState, serializerFn, storage)
+    ]
 }
 
 /**
@@ -77,7 +90,13 @@ export function useBrowserLocalStorage<T>(
     unserializerFn: UnserializerFn<T>,
     serializerFn: SerializerFn<T>
 ) {
-    return useStorageState<T>(key, initial, unserializerFn, serializerFn, window.localStorage);
+    return useStorageState<T>(
+        key,
+        initial,
+        unserializerFn,
+        serializerFn,
+        window.localStorage
+    );
 }
 
 /**
@@ -90,8 +109,17 @@ export function useBrowserSessionStorage<T>(
     unserializerFn: UnserializerFn<T>,
     serializerFn: SerializerFn<T>
 ) {
-    return useStorageState<T>(key, initial, unserializerFn, serializerFn, window.sessionStorage);
+    return useStorageState<T>(
+        key,
+        initial,
+        unserializerFn,
+        serializerFn,
+        window.sessionStorage
+    );
 }
+
+function unserializeByJsonParse(value: string) { return JSON.parse(value) };
+function serializeByJsonStrigify(value: GeneralStorageType<string | number | object>) { return JSON.stringify(value) }
 /**
  * General function that assumes the state you
  * @param initialState Initial state for storage
@@ -106,7 +134,6 @@ export function useLocalStorageState<T extends GeneralStorageType<string | numbe
         initialState,
         (value) => JSON.parse(value),
         (value) => JSON.stringify(value),
-
     )
 }
 
