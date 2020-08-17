@@ -4,22 +4,17 @@
   "description": "React hooks to abstract over useState with browser specific storage",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "scripts": {
     "test": "jest",
     "prepublish": "tsc"
   },
   "author": "Kellan Martin",
   "license": "MIT",
-  "dependencies": {
-    "typescript": "^3.9.7"
-  },
   "peerDependencies": {
     "react": "^16.13.1"
   },
   "devDependencies": {
+    "typescript": "^3.9.7",
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
