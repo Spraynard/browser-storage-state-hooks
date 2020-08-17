@@ -2,7 +2,21 @@
     "compilerOptions": {
         "jsx": "react",
         "esModuleInterop": true,
+        "declaration": true,
+        "target": "es5",
+        "module": "commonjs",
+        "outDir": "build",
+        "lib": [
+            "es2017",
+            "es7",
+            "es6",
+            "dom"
+        ],
     },
-    "exclude": ["node_modules"],
-    "include": ["index.ts"]
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "index.ts"
+    ]
 }
