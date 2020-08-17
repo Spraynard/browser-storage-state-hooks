@@ -60,7 +60,7 @@ function useStorageState<T extends any>(
     unserializerFn: UnserializerFn<T>,
     serializerFn: SerializerFn<T>,
     storage: Storage = window.localStorage,
-): [T, (value: T) => void] {
+): [T, React.Dispatch<React.SetStateAction<T>>] {
     let serialized: string | null = null;
     let unserialized: T = initial;
 
