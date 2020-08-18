@@ -16,6 +16,14 @@ Below are examples of the two most accessible hooks that are offered with this p
 
 ```js
 const [localStorageState, setLocalStorageState] = useLocalStorageState('local-storage-example', true);
+
 const [sessionStorageState, setSessionStorageState] = useSessionStorageState('session-storage-example', true);
 ```
-Both of these hooks 
+Both of these hooks require the first parameter to be a named key used for storage within the client's local or session storage. The second parameter is the initial state that you would use for a regular call to `useState`.
+
+That should be all you need to get going!
+
+### Built With
+
+* Typescript
+* React
