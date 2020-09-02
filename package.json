@@ -1,12 +1,13 @@
 {
   "name": "browser-storage-state-hooks",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React hooks to abstract over useState with browser specific storage",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
     "test": "jest",
-    "prepublish": "tsc"
+    "prepublishOnly": "tsc",
+    "build": "tsc"
   },
   "author": "Kellan Martin",
   "license": "MIT",

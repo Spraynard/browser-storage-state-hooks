@@ -70,6 +70,23 @@ function useStorageState<T extends any>(
 
     if (serialized) {
         unserialized = unserializerFn(serialized);
+
+        /** If initial an unserialized are differing types then there's a serious problem. */
+        if (typeof initial !== typeof unserialized)
+        {
+            unserialized = initial;
+        }
+
+        /**
+         * This allows our state to always be at the most recent version if we are storing a JSON object.
+         */
+        if (typeof initial === 'object')
+        {
+            unserialized = {
+                ...initial as object,
+                unserialized
+            } as T
+        }
     }
 
     const [state, setState] = React.useState<T>(unserialized);
