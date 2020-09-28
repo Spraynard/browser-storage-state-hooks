@@ -84,7 +84,7 @@ function useStorageState<T extends any>(
         {
             unserialized = {
                 ...initial as object,
-                unserialized
+                ...unserialized as object
             } as T
         }
     }
